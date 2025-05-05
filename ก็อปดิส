@@ -1,1 +1,94 @@
+from os import system
+import discord
+import asyncio
+from colorama import Fore, init, Style
+import platform
 
+init()
+
+class Clone:
+    @staticmethod
+    async def roles_delete(guild_to=None):
+        pass
+
+    @staticmethod
+    async def roles_create(guild_to=None, guild_from=None):
+        roles = [role for role in guild_from.roles if role.name != '@everyone']
+        roles = roles[::-1]
+        # Add logic to create roles in guild_to
+
+    @staticmethod
+    async def channels_delete(guild_to=None):
+        pass
+
+    @staticmethod
+    async def categories_create(guild_to=None, guild_from=None):
+        channels = guild_from.categories
+        # Add logic to create categories in guild_to
+
+    @staticmethod
+    async def channels_create(guild_to=None, guild_from=None):
+        category = None
+        # Add logic to create channels in guild_to
+
+    @staticmethod
+    async def emojis_delete(guild_to=None):
+        pass
+
+    @staticmethod
+    async def emojis_create(guild_to=None, guild_from=None):
+        pass
+
+    @staticmethod
+    async def guild_edit(guild_to=None, guild_from=None):
+        pass
+
+client = discord.Client()
+os_system = platform.system()
+
+if os_system == 'Windows':
+    system('cls')
+else:
+    system('clear')
+    print(chr(27) + '[2J')
+
+print(
+    f'''{Fore.RESET}\n\n\n         ██▀███   ▓█████▓█████▄ ▒███████▒ ▒█████   ███▄    █  ▓█████      ██████   ██░ ██  ▒█████   ██▓███  
+    \n        ▓██ ▒ ██▒ ▓█   ▀▒██▀ ██▌▒ ▒ ▒ ▄▀░▒██▒  ██▒ ██ ▀█   █  ▓█   ▀    ▒██    ▒ ▒▓██░ ██ ▒██▒  ██▒▓██░  ██ 
+    \n        ▓██ ░▄█ ▒ ▒███  ░██   █▌░ ▒ ▄▀▒░ ▒██░  ██▒▓██  ▀█ ██▒ ▒███      ░ ▓██▄   ░▒██▀▀██ ▒██░  ██▒▓██░ ██▓▒
+    \n        ▒██▀▀█▄   ▒▓█  ▄░▓█▄   ▌  ▄▀▒   ░▒██   ██░▓██▒  ▐▌██▒ ▒▓█  ▄      ▒   ██▒ ░▓█ ░██ ▒██   ██░▒██▄█▓▒ ▒
+    \n        ░██▓ ▒██▒▒░▒████░▒████▓ ▒███████▒░ ████▓▒░▒██░   ▓██░▒░▒████    ▒██████▒▒ ░▓█▒░██▓░ ████▓▒░▒██▒ ░  ░
+    \n        ░ ▒▓ ░▒▓░░░░ ▒░  ▒▒▓  ▒ ░▒▒ ▓░▒░▒░ ▒░▒░▒░ ░ ▒░   ▒ ▒ ░░░ ▒░     ▒ ▒▓▒ ▒ ░  ▒ ░░▒░▒░ ▒░▒░▒░ ▒▓▒░ ░  ░
+    \n         ░▒ ░ ▒░░ ░ ░   ░ ▒  ▒  ░▒ ▒ ░ ▒  ░ ▒ ▒░ ░ ░░   ░ ▒░░ ░ ░      ░ ░▒  ░    ▒ ░▒░ ░  ░ ▒ ▒░ ░▒ ░    
+    \n          ░   ░     ░   ░ ░  ░ ░ ░ ░ ░ ░░ ░ ░ ▒     ░   ░ ░     ░      ░  ░  ░    ░  ░░ ░░ ░ ░ ▒  ░░      
+    \n          ░     ░   ░     ░      ░ ░        ░ ░           ░ ░   ░            ░    ░  ░  ░    ░ ░          
+    \n\nBY.discord.gg/RedzoneShop\n{Style.RESET_ALL}\n'''
+)
+
+token = input(Fore.RESET + '\n   [#] Please Enter Your Token: ')
+guild_s = input(Fore.RESET + '\n   [#] Please Enter Guild Id You Want To Copy: ')
+guild = input(Fore.RESET + '\n   [#] Please Enter Guild Id Where You Want To Copy: ')
+input_guild_id = guild_s
+output_guild_id = guild
+
+print('  ')
+print('  ')
+
+@client.event
+async def on_ready():
+    extrem_map = {}
+    print(f'''\n [#] Token Login : {client.user}''')
+    print(' [#] Start copying the server.')
+    guild_from = client.get_guild(int(input_guild_id))
+    guild_to = client.get_guild(int(output_guild_id))
+    await Clone.guild_edit(guild_to, guild_from)
+    await Clone.roles_delete(guild_to)
+    await Clone.channels_delete(guild_to)
+    await Clone.roles_create(guild_to, guild_from)
+    await Clone.categories_create(guild_to, guild_from)
+    await Clone.channels_create(guild_to, guild_from)
+    print(f'''{Fore.GREEN}\n\n        [*] The copying of the server is complete.\n\n    {Style.RESET_ALL}''')
+    await asyncio.sleep(5)
+    await client.close()
+
+client.run(token)
